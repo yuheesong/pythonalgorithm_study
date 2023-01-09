@@ -1,0 +1,37 @@
+def solution(id_list, report, k):
+    
+    report = list(set(report))
+    
+    fin = []
+    limit = []
+    answer = {key:0 for key in id_list}
+    sued = {key:0 for key in id_list}   #신고당한 횟수    
+    prosecutor = {key:"" for key in id_list}   #신고한 사람들
+    for g in report:
+        g = g.split(' ')
+        sued[g[1]] += 1
+    
+    for j in report:
+        j = j.split(' ')
+        if j[0] in prosecutor.keys():
+            prosecutor[j[0]] += j[1]
+        else:
+            prosecutor[j[0]] = j[1]
+    
+    for j in sued:
+        if sued[j] >= k:
+            limit.append(j)
+        
+    for h in prosecutor:
+        for j in limit:
+            if j in prosecutor[h]:
+                answer[h] += 1
+    for j in answer:
+        fin.append(answer[j])
+    return fin
+    
+                
+    
+    
+    
+    
